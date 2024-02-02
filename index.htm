@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Комментарии</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #comments {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #comment-form {
+            margin-top: 20px;
+        }
+
+        .comment {
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="comments">
+        <!-- Existing Comments -->
+        <div class="comment">
+            <p><strong>John Doe:</strong> This is a great website!</p>
+        </div>
+        <div class="comment">
+            <p><strong>Jane Smith:</strong> I love the content!</p>
+        </div>
+
+        <!-- Comment Form -->
+        <form id="comment-form">
+            <h2>Add a Comment</h2>
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            <label for="comment">Comment:</label>
+            <textarea id="comment" rows="4" required></textarea>
+            <button type="button" onclick="addComment()">Submit Comment</button>
+        </form>
+    </div>
+
+    <script>
+        // Function to add a new comment
+        function addComment() {
+            var name = document.getElementById('name').value;
+            var commentText = document.getElementById('comment').value;
+
+            // Create a new comment element
+            var newComment = document.createElement('div');
+            newComment.classList.add('comment');
+            newComment.innerHTML = '<p><strong>' + name + ':</strong> ' + commentText + '</p>';
+
+            // Append the new comment to the comments container
+            document.getElementById('comments').appendChild(newComment);
+
+            // Clear the form fields
+            document.getElementById('name').value = '';
+            document.getElementById('comment').value = '';
+        }
+    </script>
+</body>
+</html>
