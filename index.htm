@@ -1,70 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Webpage</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="res/png/favicon.ico">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3D Experience</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+    }
+  </style>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 50px;
+      background: url('background-image.jpg') no-repeat center center fixed;
+      background-size: cover;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 300px;
+      margin: auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    input {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px;
+      cursor: pointer;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    p {
+      color: #333;
+    }
+
+    #statusMessage {
+      font-weight: bold;
+      color: #ff5722;
+    }
+  </style>
 </head>
 <body>
+<h1>Login and Registration Page</h1>
 
-    <header>
-        <h1>My GitHub Webpage</h1>
-    </header>
+<!-- Форма входа -->
+<form id="loginForm">
+  <h2>Login</h2>
+  <label for="loginUsername">Username:</label>
+  <input type="text" id="loginUsername" name="loginUsername" required>
 
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">About</a></li>
-        </ul>
-    </nav>
-    <table>
-  <tr>
-    <th>Company</th>
-    <th>Contact</th>
-    <th>Country</th>
-  </tr>
-  <tr>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-  </tr>
-  <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
-    <td>Mexico</td>
-  </tr>
-  <tr>
-    <td>Ernst Handel</td>
-    <td>Roland Mendel</td>
-    <td>Austria</td>
-  </tr>
-  <tr>
-    <td>Island Trading</td>
-    <td>Helen Bennett</td>
-    <td>UK</td>
-  </tr>
-  <tr>
-    <td>Laughing Bacchus Winecellars</td>
-    <td>Yoshi Tannamuri</td>
-    <td>Canada</td>
-  </tr>
-  <tr>
-    <td>Magazzini Alimentari Riuniti</td>
-    <td>Giovanni Rovelli</td>
-    <td>Italy</td>
-  </tr>
-</table>
-    <section id="main-content">
-        <p>Welcome to my GitHub webpage. Check out my latest projects and learn more about me.</p>
-    </section>
+  <label for="loginPassword">Password:</label>
+  <input type="password" id="loginPassword" name="loginPassword" required>
 
-    <footer>
-        <p>&copy; 2024 My GitHub Webpage</p>
-    </footer>
-    
-    <script src="script.js"></script>
+  <button type="button" onclick="login()">Login</button>
+</form>
+
+<!-- Форма регистрации -->
+<form id="registrationForm">
+  <h2>Registration</h2>
+  <label for="registerUsername">Username:</label>
+  <input type="text" id="registerUsername" name="registerUsername" required>
+
+  <label for="registerPassword">Password:</label>
+  <input type="password" id="registerPassword" name="registerPassword" required>
+
+  <button type="button" onclick="register()">Register</button>
+</form>
+
+<p id="statusMessage"></p>
+
+<script>
+  // Пример хранилища пользователей (в реальности это должно быть на сервере)
+  var users = [];
+
+  function login() {
+    var username = document.getElementById("loginUsername").value;
+    var password = document.getElementById("loginPassword").value;
+
+    // Проверка наличия пользователя
+    var user = users.find(u => u.username === username && u.password === password);
+
+    if (user) {
+      document.getElementById("statusMessage").innerHTML = "Login successful!";
+    } else {
+      document.getElementById("statusMessage").innerHTML = "Invalid username or password.";
+    }
+  }
+
+  function register() {
+    var username = document.getElementById("registerUsername").value;
+    var password = document.getElementById("registerPassword").value;
+
+    // Проверка, что пользователь с таким именем не существует
+    if (!users.some(u => u.username === username)) {
+      // Добавление нового пользователя
+      users.push({ username: username, password: password });
+      document.getElementById("statusMessage").innerHTML = "Registration successful!";
+    } else {
+      document.getElementById("statusMessage").innerHTML = "Username is already taken.";
+    }
+  }
+</script>
+<h1>Random Number Generator</h1>
+<p>Click the button to generate a random number:</p>
+
+<button onclick="generateRandomNumber()">Generate Random Number</button>
+
+<p id="randomNumber"></p>
+
+<script>
+  function generateRandomNumber() {
+
+    var randomNumber = Math.floor(Math.random() * 10000) + 1;
+
+    document.getElementById("randomNumber").innerHTML = "Random Number: " + randomNumber;
+  }
+</script>
+<form id="searchForm">
+  <label for="searchQuery">Enter YouTube video search query:</label>
+  <input type="text" id="searchQuery" name="searchQuery" required>
+  <button type="button" onclick="searchYouTube()">Search</button>
+</form>
+
+<div id="videoContainer"></div>
+
+<script>
+  function searchYouTube() {
+
+    var searchQuery = document.getElementById("searchQuery").value;
+
+    var searchUrl = "https://www.youtube.com/embed?listType=search&list=" + encodeURIComponent(searchQuery);
+
+    document.getElementById("videoContainer").innerHTML = '<iframe width="560" height="315" src="' + searchUrl + '" frameborder="0" allowfullscreen></iframe>';
+  }
+</script>
+<audio id="myAudio" controls>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<script>
+  var audio = document.getElementById("myAudio");
+
+  window.addEventListener("DOMContentLoaded", function() {
+    audio.play();
+  });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+
+  var scene = new THREE.Scene();
+
+  var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+  var renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  var geometry = new THREE.BoxGeometry();
+ 
+  var material = new THREE.MeshBasicMaterial({ color: 0x00dd00 });
+
+  var cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
+
+  camera.position.z = 2;
+
+  var animate = function () {
+    requestAnimationFrame(animate);
+
+    cube.rotation.x += 0.03;
+    cube.rotation.y += 0.03;
+
+    renderer.render(scene, camera);
+  };
+
+  animate();
+</script>
+
 </body>
 </html>
